@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,14 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('dashboard', DashboardController::class)->name('dashboard');
+
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        // dashboard route
+        Route::get('/', DashboardController::class)->name('index');
+
+        // post resource route
+        Route::resource('post', PostController::class);
+    });
 });
 
 require __DIR__ . '/auth.php';
