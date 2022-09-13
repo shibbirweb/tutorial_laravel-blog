@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostStoreRequest;
 use App\Models\Post;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -36,21 +37,15 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
-        $validated_data = $request->validate([
-            'title' => 'required|string|max:191',
-            'content' => 'required|string|max:5000',
-            'is_published' => 'required|boolean'
-        ]);
+        $validated_data = $request->validated();
 
-        $validated_data['slug'] = Str::slug($request->title);
+        $validated_data['slug'] = Str::uniqueSlug(Post::class, $request->title, 'slug');
 
         $validated_data['published_at'] = $request->is_published === '0' ? null : now();
 
         $validated_data['user_id'] = auth()->id();
-
-        // return $validated_data;
 
         Post::create($validated_data);
 
