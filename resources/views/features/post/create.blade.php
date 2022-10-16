@@ -9,7 +9,17 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard.post.store') }}" method="POST">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <form action="{{ route('dashboard.post.store') }}" method="get">
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>

@@ -16,4 +16,9 @@ class Post extends Model
         'content',
         'published_at',
     ];
+
+    public function isPublished()
+    {
+        return $this->published_at != null;
+    }
 }

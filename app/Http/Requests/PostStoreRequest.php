@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class PostStoreRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class PostStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -27,6 +29,47 @@ class PostStoreRequest extends FormRequest
             'title' => 'required|string|max:191',
             'content' => 'required|string|max:5000',
             'is_published' => 'required|boolean',
+            'slug' => '',
+            'published_at' => '',
+            'user_id' => '',
         ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            // 'title.required' => 'Title must required',
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            // 'content' => 'post body',
+        ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'slug' => Str::uniqueSlug(Post::class, $this->title, 'slug'),
+            'published_at' => $this->is_published === '0' ? null : now(),
+            'user_id' => auth()->id(),
+        ]);
     }
 }

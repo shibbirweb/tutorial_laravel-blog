@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostStoreRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -16,8 +15,17 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-        return view('features.post.index');
+        $post_query = Post::query();
+
+        if (request('orderBy') === 'oldest') {
+            $post_query->oldest('published_at');
+        } else {
+            $post_query->latest('published_at');
+        }
+
+        $posts = $post_query->paginate();
+
+        return view('features.post.index', compact('posts'));
     }
 
     /**
@@ -27,7 +35,6 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
         return view('features.post.create');
     }
 
@@ -39,17 +46,12 @@ class PostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
-        $validated_data = $request->validated();
+        // post create
+        Post::create($request->validated());
 
-        $validated_data['slug'] = Str::uniqueSlug(Post::class, $request->title, 'slug');
-
-        $validated_data['published_at'] = $request->is_published === '0' ? null : now();
-
-        $validated_data['user_id'] = auth()->id();
-
-        Post::create($validated_data);
-
-        return 'post saved';
+        return redirect()
+            ->back()
+            ->withSuccess('Post has been saved.');
     }
 
     /**
