@@ -26,9 +26,9 @@
                 <div class="card-body">
                     <div>
                         <p class="text-end">
-                            <span @class([ 'badge' , 'text-bg-warning'=> $post->published_at == null, 'text-bg-success'
-                                => $post->published_at != null ])>
-                                @if($post->published_at == null)
+                            <span @class([ 'badge' , 'text-bg-warning'=> !$post->isPublished(), 'text-bg-success'
+                                => $post->isPublished() ])>
+                                @if(!$post->isPublished())
                                 Not
                                 @endif
                                 Published
@@ -36,6 +36,7 @@
                         </p>
                     </div>
                     <h5 class="card-title">{{ $post->title }}</h5>
+                    <p class="card-text small">Posted By {{ $post->author->name }} </p>
                     <p class="card-text">{{ $post->content }}</p>
                 </div>
                 <div class="card-footer">

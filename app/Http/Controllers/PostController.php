@@ -17,6 +17,9 @@ class PostController extends Controller
     {
         $post_query = Post::query();
 
+        // eager load author
+        $post_query->with('author');
+
         if (request('orderBy') === 'oldest') {
             $post_query->oldest('published_at');
         } else {
