@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,9 @@ class PostController extends Controller
 
         // eager load author
         $post_query->with('author');
+
+        // load current user's post
+        $post_query->ofCurrentUser();
 
         if (request('orderBy') === 'oldest') {
             $post_query->oldest('published_at');
@@ -76,7 +80,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        return view('features.post.edit', compact('post'));
     }
 
     /**
@@ -86,7 +92,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostUpdateRequest $request, $id)
     {
         //
     }

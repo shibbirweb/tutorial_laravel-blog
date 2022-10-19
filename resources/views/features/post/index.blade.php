@@ -34,6 +34,18 @@
                                 Published
                             </span>
                         </p>
+                        <div class="text-end">
+                            <a href="#" class="badge text-bg-primary" title="View Details">
+                                <x-icons.show />
+                            </a>
+                            <a href="{{ route('dashboard.post.edit', $post->id)  }}" class="badge text-bg-info"
+                                title="Edit Post">
+                                <x-icons.edit />
+                            </a>
+                            <a href="#" class="badge text-bg-danger" title="Delete Post">
+                                <x-icons.delete />
+                            </a>
+                        </div>
                     </div>
                     <h5 class="card-title">{{ $post->title }}</h5>
                     <p class="card-text small">Posted By {{ $post->author->name }} </p>
