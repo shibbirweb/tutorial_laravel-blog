@@ -26,8 +26,8 @@ class MacroServiceProvider extends ServiceProvider
     public function boot()
     {
         // unique slug macro
-        Str::macro('uniqueSlug', function (string $model, string $value, string $column = 'slug') {
-            return UniqueSlugGenerator::builder($model, $value, $column)
+        Str::macro('uniqueSlug', function (string $model, string $value, string $column = 'slug', ?int $except = null, ?string $exceptColumnName = 'id') {
+            return UniqueSlugGenerator::builder($model, $value, $column, $except, $exceptColumnName)
                 ->generate();
         });
     }

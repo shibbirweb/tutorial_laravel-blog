@@ -94,7 +94,13 @@ class PostController extends Controller
      */
     public function update(PostUpdateRequest $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->update($request->validated());
+
+        return redirect()
+            ->route('dashboard.post.index')
+            ->withSuccess('Post updated successfully.');
     }
 
     /**
@@ -105,6 +111,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->delete();
+
+        return redirect()
+            ->back()
+            ->withSuccess('Post successfully deleted.');
     }
 }

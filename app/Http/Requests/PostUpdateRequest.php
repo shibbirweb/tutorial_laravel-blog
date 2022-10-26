@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class PostUpdateRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class PostUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,27 @@ class PostUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|string|max:191',
+            'content' => 'required|string|max:5000',
+            'is_published' => 'required|boolean',
         ];
     }
+
+    /**
+     * Get the validated data from the request.
+     *
+     * @param  string|null  $key
+     * @param  mixed  $default
+     * @return mixed
+     */
+    public function validated($key = null, $default = null)
+    {
+        $validated_data = parent::validated();
+
+        return $validated_data + [
+            'slug' => Str::uniqueSlug(Post::class, $this->title, 'slug', $this->route()->post),
+            'published_at' => $this->boolean('is_published') ? now() : null,
+        ];
+    }
+
 }

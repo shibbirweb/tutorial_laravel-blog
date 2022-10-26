@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -19,13 +20,23 @@ class UniqueSlugGenerator
      *
      * @return static
      */
-    public static function builder(string $model, string $value, string $column = 'slug'): static
+    public static function builder(
+        string $model, string $value,
+        string $column = 'slug',
+        ?int $except = null,
+        ?string $exceptColumnName = 'id'
+    ): static
     {
-        return new static($model, $value, $column);
+        return new static($model, $value, $column, $except, $exceptColumnName);
     }
 
-    public function __construct(protected string $model, protected string $value, protected string $column = 'slug')
-    {
+    public function __construct(
+        protected string $model,
+        protected string $value,
+        protected string $column = 'slug',
+        protected  ? int $except = null,
+        protected  ? string $exceptColumnName = 'id'
+    ) {
         $this->slug = Str::slug($value);
     }
 
@@ -34,7 +45,7 @@ class UniqueSlugGenerator
      *
      * @return string
      */
-    public function generate(): string
+    public function generate() : string
     {
         return $this->checkUnique();
     }
@@ -46,7 +57,7 @@ class UniqueSlugGenerator
      *
      * @return string
      */
-    private function checkUnique(int $attempt = 1): string
+    private function checkUnique(int $attempt = 1) : string
     {
         $model = new $this->model;
 
@@ -57,6 +68,7 @@ class UniqueSlugGenerator
         }
 
         $is_exists = $model->where($this->column, $slug)
+            ->when($this->except, fn(Builder $query): Builder => $query->whereNot($this->exceptColumnName, $this->except))
             ->exists();
 
         if (!$is_exists) {

@@ -42,9 +42,15 @@
                                 title="Edit Post">
                                 <x-icons.edit />
                             </a>
-                            <a href="#" class="badge text-bg-danger" title="Delete Post">
-                                <x-icons.delete />
-                            </a>
+                            <form action="{{ route('dashboard.post.destroy', $post->id) }}" method="POST"
+                                class="badge text-bg-danger align-top position-relative"
+                                onsubmit="return confirm('Are you sure want to delete this post?')">
+                                @csrf
+                                @method("DELETE")
+                                <button type="submit" title="Delete Post" class="stretched-link">
+                                    <x-icons.delete />
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <h5 class="card-title">{{ $post->title }}</h5>

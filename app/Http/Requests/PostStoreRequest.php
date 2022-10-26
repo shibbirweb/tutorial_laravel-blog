@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class PostStoreRequest extends FormRequest
@@ -29,9 +30,6 @@ class PostStoreRequest extends FormRequest
             'title' => 'required|string|max:191',
             'content' => 'required|string|max:5000',
             'is_published' => 'required|boolean',
-            'slug' => '',
-            'published_at' => '',
-            'user_id' => '',
         ];
     }
 
@@ -66,10 +64,36 @@ class PostStoreRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $this->merge([
-            'slug' => Str::uniqueSlug(Post::class, $this->title, 'slug'),
-            'published_at' => $this->is_published === '0' ? null : now(),
+        // $merge_items = [
+        //     'published_at' => $this->boolean('is_published') ? now() : null,
+        //     'user_id' => auth()->id(),
+        // ];
+
+        // $this->merge($merge_items);
+    }
+
+    /**
+     * Get the validated data from the request.
+     *
+     * @param  string|null  $key
+     * @param  mixed  $default
+     * @return mixed
+     */
+    public function validated($key = null, $default = null)
+    {
+        $validated = parent::validated();
+
+        // return [
+        //     ...$validated,
+        //     'published_at' => $this->boolean('is_published') ? now() : null,
+        //     'user_id' => auth()->id(),
+        //     'title' => Str::uniqueSlug(Post::class, $this->title),
+        // ];
+
+        return $validated + [
+            'published_at' => $this->boolean('is_published') ? now() : null,
             'user_id' => auth()->id(),
-        ]);
+            'slug' => Str::uniqueSlug(Post::class, $this->title),
+        ];
     }
 }
