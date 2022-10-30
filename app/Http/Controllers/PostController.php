@@ -19,7 +19,7 @@ class PostController extends Controller
         $post_query = Post::query();
 
         // eager load author
-        $post_query->with('author');
+        $post_query->with('author:id,name');
 
         // load current user's post
         $post_query->ofCurrentUser();
@@ -67,9 +67,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('features.post.show', compact('post'));
     }
 
     /**
@@ -78,10 +78,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
-
         return view('features.post.edit', compact('post'));
     }
 
@@ -92,10 +90,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostUpdateRequest $request, $id)
+    public function update(PostUpdateRequest $request, Post $post)
     {
-        $post = Post::findOrFail($id);
-
         $post->update($request->validated());
 
         return redirect()
@@ -109,10 +105,8 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
-
         $post->delete();
 
         return redirect()

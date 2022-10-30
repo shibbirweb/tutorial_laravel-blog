@@ -35,14 +35,15 @@
                             </span>
                         </p>
                         <div class="text-end">
-                            <a href="#" class="badge text-bg-primary" title="View Details">
+                            <a href="{{ route('dashboard.post.show', $post->slug) }}" class="badge text-bg-primary"
+                                title="View Details">
                                 <x-icons.show />
                             </a>
-                            <a href="{{ route('dashboard.post.edit', $post->id)  }}" class="badge text-bg-info"
+                            <a href="{{ route('dashboard.post.edit', $post->slug)  }}" class="badge text-bg-info"
                                 title="Edit Post">
                                 <x-icons.edit />
                             </a>
-                            <form action="{{ route('dashboard.post.destroy', $post->id) }}" method="POST"
+                            <form action="{{ route('dashboard.post.destroy', $post->slug) }}" method="POST"
                                 class="badge text-bg-danger align-top position-relative"
                                 onsubmit="return confirm('Are you sure want to delete this post?')">
                                 @csrf

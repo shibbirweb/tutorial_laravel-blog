@@ -62,4 +62,14 @@ class Post extends Model
     }
 
     /* === Custom helper methods end === */
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

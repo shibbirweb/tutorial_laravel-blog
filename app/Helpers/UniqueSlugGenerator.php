@@ -23,7 +23,7 @@ class UniqueSlugGenerator
     public static function builder(
         string $model, string $value,
         string $column = 'slug',
-        ?int $except = null,
+        ?string $except = null,
         ?string $exceptColumnName = 'id'
     ): static
     {
@@ -34,7 +34,7 @@ class UniqueSlugGenerator
         protected string $model,
         protected string $value,
         protected string $column = 'slug',
-        protected  ? int $except = null,
+        protected  ? string $except = null,
         protected  ? string $exceptColumnName = 'id'
     ) {
         $this->slug = Str::slug($value);

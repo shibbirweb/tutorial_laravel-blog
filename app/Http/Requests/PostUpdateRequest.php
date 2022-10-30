@@ -44,7 +44,7 @@ class PostUpdateRequest extends FormRequest
         $validated_data = parent::validated();
 
         return $validated_data + [
-            'slug' => Str::uniqueSlug(Post::class, $this->title, 'slug', $this->route()->post),
+            'slug' => Str::uniqueSlug(Post::class, $this->title, 'slug', $this->route()->originalParameter('post')),
             'published_at' => $this->boolean('is_published') ? now() : null,
         ];
     }
