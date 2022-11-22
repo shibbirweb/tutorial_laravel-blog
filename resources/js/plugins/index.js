@@ -1,3 +1,3 @@
-import './alpinejs'
-import './bootstrapcss'
+import './alpinejs';
+import './jQuery';
 

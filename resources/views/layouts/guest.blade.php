@@ -11,13 +11,15 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ Vite::template('plugins/fontawesome-free/css/all.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ Vite::template('plugins/fontawesome-free/css/all.min.css') }}"> --}}
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="{{ Vite::template('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ Vite::template('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}"> --}}
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ Vite::template('dist/css/adminlte.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ Vite::template('dist/css/adminlte.min.css') }}"> --}}
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/app.js'])
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
+    @vite(['resources/js/app.js'])
 
 </head>
 
@@ -36,11 +38,12 @@
     {{ $slot }}
 
     <!-- jQuery -->
-    <script src="{{ Vite::template('plugins/jquery/jquery.min.js') }}"></script>
+    {{-- <script src="{{ Vite::template('plugins/jquery/jquery.min.js') }}"></script> --}}
     <!-- Bootstrap 4 -->
-    <script src="{{ Vite::template('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ Vite::template('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
     <!-- AdminLTE App -->
-    <script src="{{ Vite::template('dist/js/adminlte.min.js') }}"></script>
+    {{-- <script src="{{ Vite::template('dist/js/adminlte.min.js') }}"></script> --}}
+    <script src="{{ asset('test.js') }}" defer></script>
 </body>
 
 </html>
