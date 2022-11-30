@@ -1,4 +1,4 @@
 import "./bootstrap";
 import "./plugins";
 
-import.meta.glob('../assets/template/**', {eager: true})
+// import.meta.glob('../assets/template/**')
