@@ -13,37 +13,11 @@
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="mb-3">
-                        <div class="input-group @error('email') is-invalid @enderror">
-                            <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                name="email" value="{{ old('email') }}" placeholder="Email">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-envelope"></span>
-                                </div>
-                            </div>
-                        </div>
-                        @error('email')
-                            <div class="error invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        <x-form.input-group name="email" type="email" icon="fas fa-envelope"/>
                     </div>
 
                     <div class="mb-3">
-                        <div class="input-group @error('password') is-invalid @enderror">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                name="password" placeholder="Password">
-                            <div class="input-group-append">
-                                <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
-                                </div>
-                            </div>
-                        </div>
-                        @error('password')
-                            <div class="error invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        <x-form.input-group name="password" type="password" icon="fas fa-lock"/>
                     </div>
 
                     <div class="row">
