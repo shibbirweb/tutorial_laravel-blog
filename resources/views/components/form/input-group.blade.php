@@ -1,14 +1,11 @@
 @props([
     'name', // type: String; value: any
-    'type' => 'text', // type: String; value: supported attribute values
     'placeholder' => Str::of($name)
         ->replace('_', ' ')
         ->title(), // type: String, value: Any
     'icon' => '', // type: string; value: icon css's value
     'icon_position' => 'end', // type: String; value: start|end
-    'required' => false, // type: Boolean
     'value' => '', // type: String
-    'readonly' => false, // type: Boolean
 ])
 
 <div>
@@ -21,13 +18,11 @@
                 </div>
             </div>
 
-            <input type="{{ $type }}" class="form-control @error($name) is-invalid @enderror"
-                name="{{ $name }}" value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}"
-                @if ($required) required @endif @if($readonly) readonly @endif>
+            <input class="form-control @error($name) is-invalid @enderror" name="{{ $name }}"
+                value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}" {{ $attributes }}>
         @else
-            <input type="{{ $type }}" class="form-control @error($name) is-invalid @enderror"
-                name="{{ $name }}" value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}"
-                @if ($required) required @endif @if($readonly) readonly @endif>
+            <input class="form-control @error($name) is-invalid @enderror" name="{{ $name }}"
+                value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}" {{ $attributes }}>
 
             <div class="input-group-append">
                 <div class="input-group-text">

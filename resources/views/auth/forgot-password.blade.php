@@ -7,6 +7,26 @@
                 </a>
             </div>
             <div class="card-body">
+                @if (session()->has('status'))
+                    <div class="container mt-2">
+                        <x-common.alert type="success" :message="session('status', 'This is default message')" />
+                    </div>
+                @endif
+
+
+                <button type="button" class="btn btn-success swalDefaultSuccess">
+                    Launch Success Toast
+                </button>
+
+                @push('script')
+                    {{-- <script src="{{ asset('test.js') }}" defer></script> --}}
+                @endpush
+
+
+
+
+
+
                 <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
                 <form action="{{ route('password.email') }}" method="post">
                     @csrf

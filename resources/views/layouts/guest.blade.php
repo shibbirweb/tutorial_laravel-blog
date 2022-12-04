@@ -14,8 +14,10 @@
     @vite([
         'resources/assets/template/plugins/fontawesome-free/css/all.min.css', // font awesome
         'resources/assets/template/plugins/icheck-bootstrap/icheck-bootstrap.min.css', // icheck
+       // 'resources/assets/template/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css', // sweet alert
         'resources/assets/template/dist/css/adminlte.min.css', // admin lte
     ])
+    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 </head>
 
 <body @class([
@@ -26,7 +28,6 @@
         Route::is('password.reset'),
     'register-page' => Route::is('register'),
 ])>
-
     {{ $slot }}
 
     @vite([
@@ -34,6 +35,10 @@
         'resources/assets/template/plugins/bootstrap/js/bootstrap.bundle.min.js', // bootstrap bundle
         'resources/assets/template/dist/js/adminlte.min.js', // admin lte
     ])
+
+    <script src="{{ Vite::asset('resources/assets/template/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+    @stack('script')
 </body>
 
 </html>

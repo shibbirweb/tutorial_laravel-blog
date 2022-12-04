@@ -27,14 +27,14 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Change password</button>
+                            <x-form.button block primary>Change password</x-form.button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
 
                 <p class="mt-3 mb-1">
-                    <a href="login.html">Login</a>
+                    <a href="{{ route('login') }}">Login</a>
                 </p>
             </div>
             <!-- /.login-card-body -->
