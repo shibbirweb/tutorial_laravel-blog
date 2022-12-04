@@ -7,6 +7,8 @@
     'icon' => '', // type: string; value: icon css's value
     'icon_position' => 'end', // type: String; value: start|end
     'required' => false, // type: Boolean
+    'value' => '', // type: String
+    'readonly' => false, // type: Boolean
 ])
 
 <div>
@@ -20,12 +22,12 @@
             </div>
 
             <input type="{{ $type }}" class="form-control @error($name) is-invalid @enderror"
-                name="{{ $name }}" value="{{ old($name) }}" placeholder="{{ $placeholder }}"
-                @if ($required) required @endif>
+                name="{{ $name }}" value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}"
+                @if ($required) required @endif @if($readonly) readonly @endif>
         @else
             <input type="{{ $type }}" class="form-control @error($name) is-invalid @enderror"
-                name="{{ $name }}" value="{{ old($name) }}" placeholder="{{ $placeholder }}"
-                @if ($required) required @endif>
+                name="{{ $name }}" value="{{ old($name, $value) }}" placeholder="{{ $placeholder }}"
+                @if ($required) required @endif @if($readonly) readonly @endif>
 
             <div class="input-group-append">
                 <div class="input-group-text">

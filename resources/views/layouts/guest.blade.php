@@ -20,7 +20,10 @@
 
 <body @class([
     'hold-transition',
-    'login-page' => Route::is('login'),
+    'login-page' =>
+        Route::is('login') or
+        Route::is('password.request') or
+        Route::is('password.reset'),
     'register-page' => Route::is('register'),
 ])>
 

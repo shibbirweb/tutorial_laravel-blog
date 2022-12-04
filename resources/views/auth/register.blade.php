@@ -48,7 +48,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            <x-form.button block primary>Register</x-form.button>
                         </div>
                         <!-- /.col -->
                     </div>
