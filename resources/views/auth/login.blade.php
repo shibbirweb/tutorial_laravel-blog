@@ -13,11 +13,11 @@
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="mb-3">
-                        <x-form.input-group name="email" type="email" icon="fas fa-envelope"/>
+                        <x-form.input-group name="email" type="email" icon="fas fa-envelope" required/>
                     </div>
 
                     <div class="mb-3">
-                        <x-form.input-group name="password" type="password" icon="fas fa-lock"/>
+                        <x-form.input-group name="password" type="password" icon="fas fa-lock" required/>
                     </div>
 
                     <div class="row">

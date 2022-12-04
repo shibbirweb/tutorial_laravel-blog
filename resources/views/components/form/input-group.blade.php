@@ -6,6 +6,7 @@
         ->title(), // type: String, value: Any
     'icon' => '', // type: string; value: icon css's value
     'icon_position' => 'end', // type: String; value: start|end
+    'required' => false, // type: Boolean
 ])
 
 <div>
@@ -19,10 +20,12 @@
             </div>
 
             <input type="{{ $type }}" class="form-control @error($name) is-invalid @enderror"
-                name="{{ $name }}" value="{{ old($name) }}" placeholder="{{ $placeholder }}">
+                name="{{ $name }}" value="{{ old($name) }}" placeholder="{{ $placeholder }}"
+                @if ($required) required @endif>
         @else
             <input type="{{ $type }}" class="form-control @error($name) is-invalid @enderror"
-                name="{{ $name }}" value="{{ old($name) }}" placeholder="{{ $placeholder }}">
+                name="{{ $name }}" value="{{ old($name) }}" placeholder="{{ $placeholder }}"
+                @if ($required) required @endif>
 
             <div class="input-group-append">
                 <div class="input-group-text">
