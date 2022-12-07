@@ -14,7 +14,6 @@
     @vite([
         'resources/assets/template/plugins/fontawesome-free/css/all.min.css', // font awesome
         'resources/assets/template/plugins/icheck-bootstrap/icheck-bootstrap.min.css', // icheck
-       // 'resources/assets/template/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css', // sweet alert
         'resources/assets/template/dist/css/adminlte.min.css', // admin lte
     ])
     {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
@@ -30,13 +29,18 @@
 ])>
     {{ $slot }}
 
+    @if (session()->has('status'))
+        {{--  session status message trigger on route; ['password.update', 'password.email'] --}}
+        <x-common.toast :message="session('status', 'Action has been taken.')" type="success" :autoHide="Route::is('login')" />
+    @endif
+
+
     @vite([
         'resources/assets/template/plugins/jquery/jquery.min.js', // jqery
         'resources/assets/template/plugins/bootstrap/js/bootstrap.bundle.min.js', // bootstrap bundle
+        'resources/assets/template/plugins/sweetalert2/sweetalert2.all.min.js', // sweet alert
         'resources/assets/template/dist/js/adminlte.min.js', // admin lte
     ])
-
-    <script src="{{ Vite::asset('resources/assets/template/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
     @stack('script')
 </body>
