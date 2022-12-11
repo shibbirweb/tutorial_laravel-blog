@@ -1,4 +1,7 @@
 import "./bootstrap";
 import "./plugins";
 
-// import.meta.glob('../assets/template/**')
+// template images
+import.meta.glob([
+    '../assets/template/**'
+])

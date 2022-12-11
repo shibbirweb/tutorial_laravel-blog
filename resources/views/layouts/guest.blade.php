@@ -16,7 +16,6 @@
         'resources/assets/template/plugins/icheck-bootstrap/icheck-bootstrap.min.css', // icheck
         'resources/assets/template/dist/css/adminlte.min.css', // admin lte
     ])
-    {{-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
 </head>
 
 <body @class([
