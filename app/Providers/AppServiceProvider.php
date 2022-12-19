@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,5 +27,12 @@ class AppServiceProvider extends ServiceProvider
     {
         // prevent n+1 query
         Model::preventLazyLoading(!$this->app->isProduction());
+
+        Blade::directive('throw', function ($message) {
+            if(true){
+                return "<?php throw new Exception($message); ?>";
+            }
+            return '';
+        });
     }
 }

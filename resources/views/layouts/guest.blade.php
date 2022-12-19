@@ -23,14 +23,15 @@
     'login-page' =>
         Route::is('login') or
         Route::is('password.request') or
-        Route::is('password.reset'),
+        Route::is('password.reset') or
+        Route::is('root'),
     'register-page' => Route::is('register'),
 ])>
     {{ $slot }}
 
     @if (session()->has('status'))
         {{--  session status message trigger on route; ['password.update', 'password.email'] --}}
-        <x-common.toast :message="session('status', 'Action has been taken.')" type="success" :autoHide="Route::is('login')" />
+        <x-common.toast :message="session('status', 'Action has been taken.')" type="success" :autoHide="Route::is('login') OR Route::is('root')" />
     @endif
 
 

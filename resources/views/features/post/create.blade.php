@@ -10,7 +10,7 @@
     </div>
     <form action="{{ route('dashboard.post.store') }}" method="post">
         @csrf
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror " id="title" name="title"
                 placeholder="Enter post title">
@@ -30,7 +30,7 @@
                 <option value="0">No</option>
             </select>
             <x-common.form-validation-error-message name="is_published" />
-        </div>
+        </div> --}}
 
         <button type="submit" class="btn btn-primary">Save</button>
     </form>

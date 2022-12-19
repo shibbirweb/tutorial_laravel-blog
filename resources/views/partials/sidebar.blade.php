@@ -16,22 +16,35 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ auth()->user()->name }}</a>
-                <form action="{{ route('logout') }}" method="POST"
-                    onsubmit="return confirm('Are you sure want to sign out?')">
+                <form id="logout-from" action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-xs btn-outline-info">
+                    <button type="button" id="logout-btn" class="btn btn-xs btn-outline-info">
                         <i class="fas fa-sign-out-alt"></i>
                         Sign Out
                     </button>
+
+                    @push('script')
+                        <script>
+                            const logoutForm = document.querySelector('#logout-from')
+                            const logoutBtn = document.querySelector('#logout-btn')
+                            logoutBtn.addEventListener('click', function(event) {
+                                event.preventDefault()
+                                Swal.fire({
+                                    title: 'Are you sure want to sign out?',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Yes',
+                                    cancelButtonText: `No`,
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        logoutForm.submit();
+                                    }
+                                })
+                            })
+                        </script>
+                    @endpush
                 </form>
             </div>
         </div>
-
-        {{--
-            TODO:
-            1. Logout a sweet alert confirmation
-            2. Login er por message
-            --}}
 
         <!-- SidebarSearch Form -->
         <div class="form-inline">
@@ -48,7 +61,12 @@
 
         <!-- Sidebar Menu -->
         <x-sidebar class="mt-2">
-            <x-sidebar.item name="Dashboard" icon="fa-tachometer-alt" :isActive="Route::is('dashboard.index')" :to="route('dashboard.index')" />
+            <x-sidebar.item name="Dashboard" icon="fas fa-tachometer-alt" :isActive="Route::is('dashboard.index')" :to="route('dashboard.index')" />
+            <x-sidebar.item name="Post" icon="far fa-clipboard" :isActive="Route::is('dashboard.post.index') OR Route::is('dashboard.post.create')">
+                <x-sidebar.item name="Create New" :to="route('dashboard.post.create')" :isActive="Route::is('dashboard.post.create')" />
+                <x-sidebar.item name="View All" :to="route('dashboard.post.index')" :isActive="Route::is('dashboard.post.index')" />
+                <x-sidebar.item name="dfdf" />
+            </x-sidebar.item>
         </x-sidebar>
         <!-- /.sidebar-menu -->
     </div>
