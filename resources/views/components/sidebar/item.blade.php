@@ -5,15 +5,11 @@
     'isActive' => false, // current menu is active or not
 ])
 
- {{-- @throw(empty($name), 'Name props is required.') --}}
-
- @empty($name)
-    @php
-        throw new Exception('Name prop is required');
-    @endphp
-@endempty
-
- {{-- @throw(['Name prop is required']) --}}
+{{-- Custom directive --}}
+ @propsValidation([
+    empty($name) => 'Name is required',
+    !is_bool($isActive) => 'Is active should be a boolean.',
+ ])
 
  <li @class([
      'nav-item', // common class
