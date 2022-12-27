@@ -1,4 +1,57 @@
+@section('title', 'Post list')
+@section('page_name', 'Post')
+
 <x-app-layout>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Simple Full Width Table</h3>
+
+            <div class="card-tools">
+                TODO Search Options
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width: 10px">#</th>
+                        <th>Title</th>
+                        <th>Autor</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.</td>
+                        <td>Title</td>
+                        <td>
+                            Author
+                        </td>
+                        <td><span class="badge bg-danger">55%</span></td>
+                        <td>
+                            Action
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card-footer">
+            <ul class="pagination pagination-sm float-right m-0">
+                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+            </ul>
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+    {{--
     <div class="row">
         <div class="col-12">
             <h1>Welcome to post list</h1>
@@ -19,16 +72,16 @@
     </div>
     <div class="row row-cols-1 row-cols-md-3 g-4">
 
-        @foreach($posts as $post)
+        @foreach ($posts as $post)
         <div class="col">
             <div class="card h-100">
-                {{--TODO <img src="..." class="card-img-top" alt="..."> --}}
+
                 <div class="card-body">
                     <div>
                         <p class="text-end">
                             <span @class([ 'badge' , 'text-bg-warning'=> !$post->isPublished(), 'text-bg-success'
                                 => $post->isPublished() ])>
-                                @if(!$post->isPublished())
+                                @if (!$post->isPublished())
                                 Not
                                 @endif
                                 Published
@@ -68,4 +121,5 @@
     <div class="mt-5">
         {{ $posts->links() }}
     </div>
+    --}}
 </x-app-layout>
