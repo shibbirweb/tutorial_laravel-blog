@@ -19,6 +19,10 @@ class Post extends Model
         'published_at',
     ];
 
+    protected $casts = [
+        'published_at' => 'immutable_datetime',
+    ];
+
     /* === Relationship start === */
 
     /**

@@ -42,6 +42,19 @@ class ViteServiceProvider extends ServiceProvider
                 ];
             }
 
+            // for bootstrap switch
+            if ($src === 'resources/assets/template/plugins/bootstrap-switch/js/bootstrap-switch.min.js') {
+
+                return [
+                    'type' => ($chunk == null && $manifest == null) // if development server is running
+                    ?
+                    ''
+                    :
+                    'module',
+                    'defer' => true,
+                ];
+            }
+
             return [];
         });
     }

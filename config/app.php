@@ -198,6 +198,7 @@ return [
         App\Providers\ViteServiceProvider::class,
         App\Providers\DirectiveServiceProvider::class,
         App\Providers\StrictModeServiceProvider::class,
+        App\Providers\PaginationServiceProvider::class,
 
     ],
 

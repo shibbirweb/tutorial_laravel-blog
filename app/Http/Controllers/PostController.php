@@ -30,7 +30,8 @@ class PostController extends Controller
             $post_query->latest('published_at');
         }
 
-        $posts = $post_query->paginate();
+       $posts = $post_query->paginate(10);
+
 
         return view('features.post.index', compact('posts'));
     }

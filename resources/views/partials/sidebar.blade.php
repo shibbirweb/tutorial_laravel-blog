@@ -65,7 +65,6 @@
             <x-sidebar.item name="Post" icon="far fa-clipboard" :isActive="Route::is('dashboard.post.index') or Route::is('dashboard.post.create')">
                 <x-sidebar.item name="Create New" :to="route('dashboard.post.create')" :isActive="Route::is('dashboard.post.create')" />
                 <x-sidebar.item name="View All" :to="route('dashboard.post.index')" :isActive="Route::is('dashboard.post.index')" />
-                <x-sidebar.item name="Test"/>
             </x-sidebar.item>
         </x-sidebar>
         <!-- /.sidebar-menu -->
