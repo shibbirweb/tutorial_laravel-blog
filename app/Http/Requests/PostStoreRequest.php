@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class PostStoreRequest extends FormRequest
@@ -29,7 +28,7 @@ class PostStoreRequest extends FormRequest
         return [
             'title' => 'required|string|max:191',
             'content' => 'required|string|max:5000',
-            'is_published' => 'required|boolean',
+            'is_published' => 'nullable|boolean',
         ];
     }
 
