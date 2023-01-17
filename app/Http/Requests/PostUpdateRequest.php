@@ -28,7 +28,7 @@ class PostUpdateRequest extends FormRequest
         return [
             'title' => 'required|string|max:191',
             'content' => 'required|string|max:5000',
-            'is_published' => 'required|boolean',
+            'is_published' => 'nullable|boolean',
         ];
     }
 

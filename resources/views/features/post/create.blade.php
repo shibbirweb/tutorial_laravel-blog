@@ -1,7 +1,6 @@
 <x-app-layout>
     <div class="card">
         <form action="{{ route('dashboard.post.store') }}" method="post">
-            @csrf
             <div class="card-header">
                 <h3 class="card-title">Create</h3>
 
@@ -10,7 +9,7 @@
                 </div>
             </div>
             <!-- /.card-header -->
-
+            @csrf
             <div class="card-body">
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -26,20 +25,8 @@
 
                 <div class="form-group">
                     <label class="mr-2" for="publish-now">Do you want to publish now?</label>
-                    <input type="checkbox" name="is_published" checked data-on-text="Yes" data-off-text="No"
-                        value="1" data-bootstrap-switch data-off-color="danger" data-on-color="success"
-                        id="publish-now">
+                    <x-form.checkbox-switch :checked="old('is_published') == 1" name="is_published" id="publish-now" />
                 </div>
-
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
             </div>
             <!-- /.card-body -->
 
@@ -48,6 +35,5 @@
             </div>
             <!-- /.card-footer -->
         </form>
-
     </div>
 </x-app-layout>

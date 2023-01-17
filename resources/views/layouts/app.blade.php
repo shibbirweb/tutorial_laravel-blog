@@ -74,11 +74,12 @@
     </div>
     <!-- ./wrapper -->
 
+
+
     @vite([
         'resources/assets/template/plugins/jquery/jquery.min.js', // jQuery
         'resources/assets/template/plugins/bootstrap/js/bootstrap.bundle.min.js', // Bootstrap 4
         'resources/assets/template/plugins/sweetalert2/sweetalert2.all.min.js', // sweet alert
-        'resources/assets/template/plugins/bootstrap-switch/js/bootstrap-switch.min.js', // Bootstrap Switch
         'resources/assets/template/dist/js/adminlte.min.js', // AdminLTE App
         'resources/assets/template/dist/js/demo.js', // AdminLTE for demo purposes
     ])

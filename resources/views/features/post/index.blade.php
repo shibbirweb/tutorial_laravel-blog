@@ -55,7 +55,7 @@
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu" role="menu" style="">
-                                            <a class="dropdown-item" href="#">Edit</a>
+                                            <a class="dropdown-item" href="{{ route('dashboard.post.edit', $post->slug) }}">Edit</a>
                                             <a class="dropdown-item" href="#">Delete</a>
                                         </div>
                                     </div>

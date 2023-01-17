@@ -1,45 +1,40 @@
 <x-app-layout>
-    <div class="row">
-        <div class="col-12">
-            <h1>Edit Post</h1>
+    <div class="card">
+        <form action="{{ route('dashboard.post.update', $post->slug) }}" method="post">
+            @method('PUT')
+            @csrf
+            <div class="card-header">
+                <h3 class="card-title">Edit</h3>
 
-            <div class="my-4 text-end">
-                <a href="{{ route('dashboard.post.index')  }}" class="btn btn-primary">Back to list</a>
+                <div class="card-tools">
+                    <a href="{{ route('dashboard.post.index') }}" class="btn btn-primary btn-sm">Back to list</a>
+                </div>
             </div>
-        </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <x-form.input id="title" name="title" placeholder="Enter post title"
+                        value="{{ old('title', $post->title) }}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="content">Content</label>
+                    <x-form.input type="textarea" id="content" name="content" placeholder="Enter post content"
+                        rows="3" value="{{ old('content', $post->content) }}" />
+                </div>
+
+                <div class="form-group">
+                    <label class="mr-2" for="publish-now">Do you want to publish now?</label>
+                    <x-form.checkbox-switch :checked="old('is_published', $post->isPublished()) == 1" name="is_published" id="publish-now" />
+                </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+                <x-form.button>Save</x-button>
+            </div>
+            <!-- /.card-footer -->
+        </form>
     </div>
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-
-    <form action="{{ route('dashboard.post.update', $post->slug) }}" method="post">
-        @method("PATCH")
-        @csrf
-        <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}"
-                placeholder="Enter post title">
-        </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">Content</label>
-            <textarea class="form-control" id="content" name="content" rows="3"
-                placeholder="Enter post content">{{ $post->content }}</textarea>
-        </div>
-        <div class="mb-3">
-            <label for="is-published" class="form-label">Do you want to publish now?</label>
-            <select class="form-select" id="is-published" name="is_published">
-                <option value="1" @selected($post->isPublished())>Yes</option>
-                <option value="0" @selected(!$post->isPublished())>No</option>
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
 </x-app-layout>

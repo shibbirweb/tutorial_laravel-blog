@@ -82,13 +82,6 @@ class PostStoreRequest extends FormRequest
     {
         $validated = parent::validated();
 
-        // return [
-        //     ...$validated,
-        //     'published_at' => $this->boolean('is_published') ? now() : null,
-        //     'user_id' => auth()->id(),
-        //     'title' => Str::uniqueSlug(Post::class, $this->title),
-        // ];
-
         return $validated + [
             'published_at' => $this->boolean('is_published') ? now() : null,
             'user_id' => auth()->id(),
